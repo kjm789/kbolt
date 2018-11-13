@@ -1,8 +1,7 @@
 # kbolt
 Java Web Application Docker Stack
 
-
-Implementation was inspired from living with a deveops mindset in a non-deveops work environment. Also, this allows me to start playing with Docket and the Docker remote API.
+Allows me to start playing with Docket and the Docker remote API.
 
 This project was influenced by various works on the nets. They are as follows:
 
