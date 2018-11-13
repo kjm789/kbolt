@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
 		config.vm.define "ubuntu" do |ubuntu|
 
 			# Specifically what box
-  			ubuntu.vm.box = "ubuntu/trusty64"
+  			ubuntu.vm.box = "ubuntu/xenial64"
 
   			# Since this will only be used to spin up the container web infrastructure locally, this setting will suffice ~M.K.
   			ubuntu.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 
   			# Lets add/change some configs for the VM
   			ubuntu.vm.provider "vbox" do |vb|
-  				vb.cpus = 2
+  				vb.cpus = 1	
   				vb.memory = 2048
   			end
 
