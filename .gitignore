@@ -1,2 +1,5 @@
 # Vagrant related files #
 .vagrant
+
+# Remove any potential log file from repo #
+*.log
