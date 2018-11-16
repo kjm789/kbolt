@@ -14,10 +14,11 @@ Vagrant.configure("2") do |config|
   			ubuntu.vm.box = "ubuntu/xenial64"
 
   			# Since this will only be used to spin up the container web infrastructure locally, this setting will suffice ~M.K.
-  			ubuntu.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+  			ubuntu.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1"
 
-  			# Lets sync up folders from host to guest OS
-  			#ubuntu.vm.synced_folder "/", "/bootup_data"
+  			# Lets sync up web infrast. folders from host to guest OS's
+  			ubuntu.vm.synced_folder "../../WebInfrast/Tomcat", "/web-infrast/tomcat"
+  			ubuntu.vm.synced_folder "../../WebInfrast/Httpd", "/web-infrast/httpd"
 
   			# Lets add/change some configs for the VM
   			ubuntu.vm.provider "vbox" do |vb|
