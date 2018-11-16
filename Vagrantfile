@@ -16,7 +16,10 @@ Vagrant.configure("2") do |config|
   			# Since this will only be used to spin up the container web infrastructure locally, this setting will suffice ~M.K.
   			ubuntu.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1"
 
-  			# Lets sync up web infrast. folders from host to guest OS's
+			# Disable default sync_folder "." => "/vagrant"
+			ubuntu.vm.synced_folder ".", "/vagrant", disabled: true
+
+			# Lets sync up web infrast. folders from host to guest OS's
   			ubuntu.vm.synced_folder "./webInfrast/tomcat", "/web-infrast/tomcat"
   			ubuntu.vm.synced_folder "./webInfrast/httpd", "/web-infrast/httpd"
 
