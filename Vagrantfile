@@ -1,6 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# Plugins check
+unless Vagrant.has_plugin?("vagrant-docker-compose")
+  raise 'Missing vagrant-docker-compose plugin! Make sure to install it by `vagrant plugin install vagrant-docker-compose`.'
+end
+
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -20,8 +26,7 @@ Vagrant.configure("2") do |config|
 			ubuntu.vm.synced_folder ".", "/vagrant", disabled: true
 
 			# Lets sync up web infrast. folders from host to guest OS's
-  			ubuntu.vm.synced_folder "./webInfrast/tomcat", "/web-infrast/tomcat"
-  			ubuntu.vm.synced_folder "./webInfrast/httpd", "/web-infrast/httpd"
+  			ubuntu.vm.synced_folder "./webInfrast", "/web-infrast"
 
   			# Lets add/change some configs for the VM
   			ubuntu.vm.provider "vbox" do |vb|
@@ -32,7 +37,11 @@ Vagrant.configure("2") do |config|
  			# Setup docker using vagrant's built-in provision system
   			ubuntu.vm.provision :docker
 
-  			# Enable Docker Remote API via shell script
-  			ubuntu.vm.provision :shell, path: "./enable-docker-remote-api.sh"
-  		end
+			# Setup docker-composer and then run yml
+			ubuntu.vm.provision :docker_compose, yml: "/web-infrast/docker-compose.yml", run: "always"
+
+  		# Enable Docker Remote API via shell script
+  		ubuntu.vm.provision :shell, path: "./enable-docker-remote-api.sh"
+      
+		end
 end

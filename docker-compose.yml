@@ -1,0 +1,15 @@
+
+version: '3'
+services:
+  httpd:
+    build: ./httpd
+    ports:
+      - "3000:80"
+  tomcat01:
+      build: ./tomcat
+      ports:
+        - "8009"
+  tomcat02:
+      build: ./tomcat
+      ports:
+        - "8009"
